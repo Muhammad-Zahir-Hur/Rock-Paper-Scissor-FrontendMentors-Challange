@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import rock from "./images/icon-rock.svg";
 import lizard from "./images/icon-lizard.svg";
 import paper from "./images/icon-paper.svg";
@@ -7,6 +8,16 @@ import spock from "./images/icon-spock.svg";
 import { useState, createContext, useContext, useEffect } from "react";
 import { useReducer } from "react";
 let GameContext = createContext();
+let Animate = ({ children }) => {
+	return (
+		<motion.div
+			initial={{ opacity: 0, scale: 0.5 }}
+			animate={{ opacity: 1, scale: 1 }}
+			transition={{ duration: 0.5 }}>
+			{children}
+		</motion.div>
+	);
+};
 
 // -------------------Element Componetn-------------
 
@@ -18,7 +29,7 @@ function Element({ file, color, id, onClick, shadowColor }) {
 				className="element"
 				style={{
 					borderColor: color,
-					boxShadow: `-0.3rem 0.3rem  0px ${shadowColor}`,
+					boxShadow: `-0.5rem 0.3rem  0px ${shadowColor}`,
 				}}
 				onClick={() => {
 					onClick(file);
@@ -118,13 +129,13 @@ function Elements() {
 	return (
 		<div className="elements">
 			<div className="elements-inner">
-				<div className="row" id="row1">
-					{row1}
-				</div>
+				<div className="row">{row3}</div>
 				<div className="row" id="row2">
 					{row2}
 				</div>
-				<div className="row">{row3}</div>
+				<div className="row" id="row1">
+					{row1}
+				</div>
 			</div>
 		</div>
 	);
@@ -147,29 +158,35 @@ function Result() {
 
 	return (
 		<div className="result">
-			<div className="person">
-				<p className="choser-text">YOU PICKED:</p>
-				<Element file={person} color={colors[elements.indexOf(person)]} />
-			</div>
-			{phase == 4 && (
-				<div className="button">
-					<p className="para-winner">{winner} </p>
-					<button
-						className="replay"
-						onClick={() => {
-							setPhase(1);
-							setPerson("");
-							setHouse("");
-						}}>
-						Replay
-					</button>
+			<Animate>
+				<div className="person">
+					<p className="choser-text">YOU PICKED:</p>
+					<Element file={person} color={colors[elements.indexOf(person)]} />
 				</div>
+			</Animate>
+			{phase == 4 && (
+				<Animate>
+					<div className="button">
+						<p className="para-winner">{winner} </p>
+						<button
+							className="replay"
+							onClick={() => {
+								setPhase(1);
+								setPerson("");
+								setHouse("");
+							}}>
+							Replay
+						</button>
+					</div>
+				</Animate>
 			)}
 			{(phase == 3 || phase == 4) && (
-				<div className="house">
-					<p className="choser-text">THE HOUSE PICKED:</p>
-					<Element file={house} color={colors[elements.indexOf(house)]} />
-				</div>
+				<Animate>
+					<div className="house">
+						<p className="choser-text">THE HOUSE PICKED:</p>
+						<Element file={house} color={colors[elements.indexOf(house)]} />
+					</div>
+				</Animate>
 			)}
 		</div>
 	);
@@ -193,7 +210,9 @@ function Score() {
 			</div>
 			<div className="score-box">
 				<p className="score-text">score</p>
-				<p className="score">{score / 2}</p>
+				<Animate>
+					<p className="score">{score}</p>
+				</Animate>
 			</div>
 		</div>
 	);
@@ -246,26 +265,35 @@ function App() {
 	let [score, setScore] = useState(0);
 	return (
 		<>
-			<div className="container">
-				<GameContext.Provider
-					value={{
-						setPerson,
-						setHouse,
-						setPhase,
-						person,
-						house,
-						phase,
-						dispatchWinner,
-						winner,
-						score,
-						setScore,
-					}}>
-					<Score />
-					{phase === 1 ? <Elements /> : <Result />}
-				</GameContext.Provider>
-			</div>
+			<Animate>
+				<div className="container">
+					<GameContext.Provider
+						value={{
+							setPerson,
+							setHouse,
+							setPhase,
+							person,
+							house,
+							phase,
+							dispatchWinner,
+							winner,
+							score,
+							setScore,
+						}}>
+						<Score />
+						{phase === 1 ? <Elements /> : <Result />}
+					</GameContext.Provider>
+				</div>
+			</Animate>
 		</>
 	);
 }
 
 export default App;
+
+/*git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Muhammad-Zahir-Hur/Rock-Paper-Scissor-FrontendMentors-Challange.git
+git push -u origin main*/

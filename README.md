@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Go to Github](https://github.com/Muhammad-Zahir-Hur/Rock-Paper-Scissor-FrontendMentors-Challange)
+- Live Site URL: [open now](https://muhammad-zahir-hur.github.io/Rock-Paper-Scissor-FrontendMentors-Challange/)
 
 ## My process
 
@@ -69,5 +69,5 @@ I am planning to add some transition effects while updating the phases.
 
 ### Shamaeel Ahmed
 
-He was the One by whome I got ispired and decided to complete this challange. On my way completing the challange he help me in every moment. I talked to him about he solutions of the problems I got, he provided he his support in a sympathic and encouraging manner. Thanking you alot Shamaeel.
+He was the One by whom I got inspired and decided to complete this challenge. On my way completing the challenge he help me in every moment. I talked to him about he solutions of the problems I got, he provided he his support in a sympathetic and encouraging manner. Thanking you a lot Shamaeel.
 [Shamaeel Ahmed](https://github.com/ShamaeelAhmed)
